@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CUKI AI Menu</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="displayShell">
+  <main id="app">
+    <video id="visionCamera" autoplay muted playsinline></video>
+    <audio id="aiAudio" autoplay></audio>
+
+    <header class="topbar">
+      <div class="brand-mini">
+        <img src="/media/cuki-brand-header.png" alt="CUKI">
+        <div><b>AI MENU</b><span id="businessName">CUKI Company</span></div>
+      </div>
+      <div class="status-row">
+        <div id="posStatus" class="status-pill warn"><i></i><span>POS connecting</span></div>
+        <div id="gestureStatus" class="status-pill warn"><i></i><span>Hand AI</span></div>
+        <div id="voiceStatus" class="status-pill warn"><i></i><span>Voice AI</span></div>
+      </div>
+    </header>
+
+    <section class="screen active welcome" data-screen="0">
+      <div class="halo halo-a"></div><div class="halo halo-b"></div>
+      <div class="welcome-center">
+        <img class="welcome-logo" src="/media/cuki-brand-header.png" alt="CUKI">
+        <div class="eyebrow">A TASTE OF CUKI</div>
+        <h1>Meet your<br><em>AI Menu.</em></h1>
+        <p class="welcome-copy">Live products, live prices, voice help and a little CUKI magic.</p>
+        <div class="wave-cta"><span>✋</span><b>WAVE TO START</b></div>
+        <small>or say “Hi Cuki”</small>
+      </div>
+      <div class="live-badge"><span></span> LIVE FROM CUKI POS</div>
+    </section>
+
+    <section class="screen menu-screen" data-screen="1">
+      <div class="section-head">
+        <div><span class="eyebrow">LIVE MENU</span><h2>Choose your Cuki</h2></div>
+        <div class="currency-chip" id="currencyChip">AWG</div>
+      </div>
+
+      <div id="catalogEmpty" class="empty-state hidden">
+        <div class="empty-icon">↻</div>
+        <h3>Connecting to CUKI POS</h3>
+        <p id="catalogEmptyText">Getting the latest menu…</p>
+      </div>
+
+      <div id="menuList" class="menu-list"></div>
+
+      <div id="boxBuilder" class="box-builder hidden">
+        <div><span>YOUR CUKI BOX</span><b id="boxProgress">0 / 3</b></div>
+        <div id="boxSlots" class="box-slots"></div>
+      </div>
+
+      <div class="gesture-guide">
+        <div><kbd>↑</kbd><kbd>↓</kbd><span>move through menu</span></div>
+        <div><span class="palm">✋</span><span>hold palm to add</span></div>
+      </div>
+    </section>
+
+    <section class="screen ai-screen" data-screen="2">
+      <div class="section-head">
+        <div><span class="eyebrow">ASK CUKI</span><h2>Just say it.</h2></div>
+        <div class="voice-wave"><i></i><i></i><i></i><i></i><i></i></div>
+      </div>
+      <div class="ai-orb"><span>CUKI</span><b>AI</b></div>
+      <div class="ai-message"><b>Hi, I’m Cuki.</b><span>Ask me about today’s menu, prices, availability, your cart, or a selfie.</span></div>
+      <div class="prompt-stack">
+        <div>“What Cuki’s are available?”</div>
+        <div>“How much is Pistachio?”</div>
+        <div>“Add two to my cart.”</div>
+        <div>“Take a selfie.”</div>
+      </div>
+      <div class="mic-status"><span>●</span> Speak naturally</div>
+    </section>
+
+    <section class="screen cart-screen" data-screen="3">
+      <div class="section-head">
+        <div><span class="eyebrow">YOUR ORDER</span><h2>Sweet choices.</h2></div>
+        <div class="cart-count" id="cartCount">0</div>
+      </div>
+      <div id="cartList" class="cart-list"></div>
+      <div id="cartEmpty" class="cart-empty">
+        <div>♡</div><h3>Your cart is empty</h3><p>Say “show me the menu” to start.</p>
+      </div>
+      <div class="cart-total">
+        <div><span>Total</span><b id="cartTotal">AWG 0.00</b></div>
+        <small>CUKI prices already include the configured tax.</small>
+      </div>
+      <div class="handoff-note"><b>POS handoff</b><span>Checkout handoff to the cashier is the next integration step. Your menu and cart are already using live POS prices.</span></div>
+    </section>
+
+    <section class="screen selfie-screen" data-screen="4">
+      <div class="section-head light-head">
+        <div><span class="eyebrow">SELFIE</span><h2>Sweet moment.</h2></div>
+      </div>
+      <div class="camera-shell">
+        <video id="selfieCamera" autoplay muted playsinline></video>
+        <canvas id="captureCanvas"></canvas>
+        <div class="camera-corners"></div>
+        <div id="countdown" class="countdown"></div>
+      </div>
+      <h3 id="selfieStatus">Hold an open palm to take your photo</h3>
+      <p>or say “take my picture”</p>
+    </section>
+
+    <section class="screen preview-screen" data-screen="5">
+      <div class="section-head"><div><span class="eyebrow">YOUR SELFIE</span><h2>Keep it?</h2></div></div>
+      <div class="snapshot-frame"><img id="snapshot" alt="CUKI selfie"><div>♡ A TASTE OF CUKI</div></div>
+      <div class="preview-help"><span>Say “retake”</span><b>or</b><span>say “keep it”</span></div>
+    </section>
+
+    <section class="screen qr-screen" data-screen="6">
+      <div class="section-head"><div><span class="eyebrow">YOUR PHOTO</span><h2>Scan & keep it.</h2></div></div>
+      <div class="qr-wrap"><img id="qrImage" alt="Selfie QR"></div>
+      <p>Your photo pickup link is temporary.</p>
+      <small id="qrNote"></small>
+      <div class="thanks">Thanks for visiting CUKI ♡</div>
+    </section>
+
+    <section class="screen info-screen" data-screen="7">
+      <div class="info-center">
+        <img src="/media/cuki-brand-header.png" alt="CUKI">
+        <span class="eyebrow">CUKI AI MENU</span>
+        <h2>See you soon.</h2>
+        <p>Wave up to explore again, or just talk to Cuki.</p>
+        <div id="businessDetails" class="business-details"></div>
+      </div>
+    </section>
+
+    <div id="gestureToast" class="gesture-toast"></div>
+    <div id="voiceCaption" class="voice-caption"></div>
+
+    <div id="gestureDebug" class="gesture-debug">
+      <canvas id="gestureDebugCanvas" width="320" height="240"></canvas>
+      <div id="gestureDebugLabel">Starting hand camera…</div>
+      <small>G = hide preview</small>
+    </div>
+
+    <div id="calibrationOverlay" class="overlay" aria-hidden="true">
+      <div class="settings-card">
+        <button id="calibrationClose" class="close-btn">×</button>
+        <span class="eyebrow">GESTURE CALIBRATION</span><h2>Make it feel right.</h2>
+        <div class="preset-row">
+          <button data-preset="easy">Easy</button><button data-preset="balanced">Balanced</button><button data-preset="precise" class="active">Precise</button>
+        </div>
+        <label>Swipe distance <b id="distanceValue">11.5%</b><input id="distanceSlider" type="range" min="6" max="20" step="0.5"></label>
+        <label>Sideways allowance <b id="verticalValue">55%</b><input id="verticalSlider" type="range" min="30" max="80" step="5"></label>
+        <label>Direction consistency <b id="consistencyValue">72%</b><input id="consistencySlider" type="range" min="55" max="90" step="1"></label>
+        <label>Swipe cooldown <b id="cooldownValue">1.5 s</b><input id="cooldownSlider" type="range" min="800" max="2500" step="100"></label>
+        <label>Palm hold <b id="palmHoldValue">1.1 s</b><input id="palmHoldSlider" type="range" min="600" max="2000" step="100"></label>
+        <div id="calibrationLiveStatus" class="cal-live">Show your hand to the camera.</div>
+        <div class="settings-actions"><button id="resetCalibration">Reset</button><button id="saveCalibration">Save & Close</button></div>
+      </div>
+    </div>
+
+    <div id="displaySettings" class="overlay" aria-hidden="true">
+      <div class="settings-card">
+        <button id="displaySettingsClose" class="close-btn">×</button>
+        <span class="eyebrow">DISPLAY</span><h2>Fit the mirror.</h2>
+        <div class="display-grid">
+          <button data-layout="portrait" class="active">Portrait<br><small>1080×1920</small></button>
+          <button data-layout="surfacePortrait">Surface Portrait<br><small>1824×2736</small></button>
+          <button data-layout="landscape">Landscape<br><small>1920×1080</small></button>
+          <button data-layout="surfaceLandscape">Surface Landscape<br><small>2736×1824</small></button>
+        </div>
+        <div class="fit-row"><button data-fit="fit" class="active">FIT</button><button data-fit="fill">FILL</button></div>
+        <div class="display-readout"><span>Monitor <b id="monitorResolution">—</b></span><span>Canvas <b id="designResolution">—</b></span><span>Scale <b id="displayScale">—</b></span></div>
+      </div>
+    </div>
+
+    <footer class="admin-hint">C calibrate · D display · G hand preview · A reconnect AI · F11 fullscreen</footer>
+  </main>
+</div>
+<script type="module" src="/renderer.mjs"></script>
+</body>
+</html>
