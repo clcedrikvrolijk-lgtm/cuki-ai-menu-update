@@ -1,0 +1,6 @@
+{
+  "enabled": true,
+  "manifest_url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/latest.json",
+  "check_on_start": true,
+  "timeout_seconds": 12
+}
