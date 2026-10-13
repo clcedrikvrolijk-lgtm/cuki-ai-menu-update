@@ -1,7 +1,29 @@
 {
   "app_name": "CUKI AI Menu",
-  "version": "0.7.1",
+  "channel": "stable",
+  "version": "1.0.0",
   "published_at": "2026-10-13",
-  "notes": "Initial GitHub update channel. No app files need to change yet.",
-  "files": []
+  "notes": "Complete CUKI AI Menu redesign with live POS catalog, current prices and sold-out state, box builder, local cart, concise Coral voice tools, directional gesture navigation, calibration, display fitting and selfie QR flow. Product pictures are intentionally not part of this release.",
+  "files": [
+    {
+      "path": "index.html",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.0.0/index.html"
+    },
+    {
+      "path": "style.css",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.0.0/style.css"
+    },
+    {
+      "path": "renderer.mjs",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.0.0/renderer.mjs"
+    },
+    {
+      "path": "main.js",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.0.0/main.js"
+    },
+    {
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.0.0/package.json"
+    }
+  ]
 }
