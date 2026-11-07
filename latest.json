@@ -1,9 +1,9 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "published_at": "2026-11-07",
-  "notes": "Live weekly slideshow with spoken replies only after explicit Hey CUKI requests.",
+  "notes": "Open the AI Menu full screen by default. F11 still toggles full screen.",
   "files": [
     {
       "path": "index.html",
@@ -22,13 +22,13 @@
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/main.js",
-      "sha256": "8be9114e5dfab76f19a00772cfc1ec99a7cf844b0d7fac441f9055b520383286"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.2/main.js",
+      "sha256": "226cb56750bc4cb253a64d36198f99f301173a068b918fe68ed74ce0bfd98fc1"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/package.json",
-      "sha256": "3293555b252439ed8f66ee60fcee0aaf229dfcb889466371bd42340137ae58ff"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.2/package.json",
+      "sha256": "1982e9c14556a231b0eaad228ea9c1d84ff98fff9043ccef8f48c45a32cd48bb"
     },
     {
       "path": "display-content.json",
