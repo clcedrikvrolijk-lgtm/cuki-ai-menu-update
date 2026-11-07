@@ -1,16 +1,69 @@
 {
-  "app_name": "CUKI Weekly Display",
+  "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.1.0",
+  "version": "1.3.1",
   "published_at": "2026-11-07",
-  "notes": "Simplified CUKI display: updateable weekly menu poster and Iconic CUKI Club QR. Voice is off by default. Cart, checkout, selfie and OpenAI voice dependencies are removed from the customer experience.",
+  "notes": "Live weekly slideshow with spoken replies only after explicit Hey CUKI requests.",
   "files": [
-    {"path":"index.html","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/index.html"},
-    {"path":"style.css","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/style.css"},
-    {"path":"renderer.mjs","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/renderer.mjs"},
-    {"path":"main.js","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/main.js"},
-    {"path":"package.json","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/package.json"},
-    {"path":"display-content.json","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/display-content.json"},
-    {"path":"README_FIRST.txt","url":"https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.1.0/README_FIRST.txt"}
+    {
+      "path": "index.html",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/index.html",
+      "sha256": "e5a6553d2c31a70ab71a34d67832de6b287fdd8cea63b03366c2b35b9c9cd158"
+    },
+    {
+      "path": "style.css",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/style.css",
+      "sha256": "6d557157ae8bc26272c988ffdb75155ea2b36d1ef2d4947bddf696f5bb30337b"
+    },
+    {
+      "path": "renderer.mjs",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/renderer.mjs",
+      "sha256": "b5b709b8914bf8d81b9ffbfce3ea3e75241d13e5f190ae8b1b34e99987763a06"
+    },
+    {
+      "path": "main.js",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/main.js",
+      "sha256": "8be9114e5dfab76f19a00772cfc1ec99a7cf844b0d7fac441f9055b520383286"
+    },
+    {
+      "path": "package.json",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/package.json",
+      "sha256": "3293555b252439ed8f66ee60fcee0aaf229dfcb889466371bd42340137ae58ff"
+    },
+    {
+      "path": "display-content.json",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/display-content.json",
+      "sha256": "1f93b65432a8d3e1c6e33855afbaac47f0a9829a4cf55ff1a1370096dd5b677d"
+    },
+    {
+      "path": "README_FIRST.txt",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/README_FIRST.txt",
+      "sha256": "448818a8c1730ea62dce97abe705d72a59b17afa80ed7d60176d5ee94766ea18"
+    },
+    {
+      "path": "speech-listener.ps1",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/speech-listener.ps1",
+      "sha256": "761df74b0c0f0556273698f66b6397e704bae15e99dfea6c34f99d01b6446ce6"
+    },
+    {
+      "path": "START_CUKI.bat",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/START_CUKI.bat",
+      "sha256": "297d25bf021ab39234b67942fe8b5dbab267a1f42b6cce429b76354873b2c63b"
+    },
+    {
+      "path": "INSTALL_AND_START.bat",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/INSTALL_AND_START.bat",
+      "sha256": "5688bd7cb397e8ee94d3682268bbfcf4796390cad9391aceb7aa0f9c17e9277b"
+    },
+    {
+      "path": "media/payaw-original-qr.png",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/media/payaw-original-qr.png",
+      "sha256": "d057c27151f6adf31ae76e45bd0fb2fd0da8f7ef8270974590ee710313c802c5"
+    },
+    {
+      "path": "media/cuki-brand-header.png",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/media/cuki-brand-header.png",
+      "sha256": "5cbe5fcca1476a4cb97d05eff8cf82c97035aedee506f32d96de888c45fb0e11"
+    }
   ]
 }
