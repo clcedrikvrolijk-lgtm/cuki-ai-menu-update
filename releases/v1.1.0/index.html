@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CUKI Weekly Display</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="shell">
+  <main id="app">
+    <video id="visionCamera" autoplay muted playsinline></video>
+
+    <header class="topbar">
+      <img class="brand-logo" src="/media/cuki-brand-header.png" alt="CUKI">
+      <div class="top-status">
+        <span id="contentStatus" class="status-dot"></span>
+        <span id="contentStatusText">Loading weekly menu</span>
+      </div>
+    </header>
+
+    <section class="screen active menu-screen" data-screen="0">
+      <div class="poster">
+        <div class="poster-kicker" id="menuEyebrow">THIS WEEK AT CUKI</div>
+        <div class="poster-date" id="menuDate">SATURDAY</div>
+        <h1 id="menuTitle">Your Saturday favorites.</h1>
+        <p class="poster-subtitle" id="menuSubtitle"></p>
+        <div id="menuSections" class="menu-sections"></div>
+        <div class="poster-footer">
+          <span>@CUKICOMPANY</span>
+          <b>A TASTE OF CUKI</b>
+        </div>
+      </div>
+      <div class="navigation-hint"><span>↓</span> SWIPE DOWN FOR THE ICONIC CUKI CLUB</div>
+    </section>
+
+    <section class="screen club-screen" data-screen="1">
+      <div class="club-bg-word" aria-hidden="true">CLUB</div>
+      <div class="club-content">
+        <div class="club-kicker">CUKI · LOYALTY</div>
+        <h1 id="clubTitle">THE ICONIC<br>CUKI CLUB</h1>
+        <p id="clubSubtitle" class="club-subtitle">Good taste deserves perks.</p>
+
+        <div class="qr-card">
+          <img id="clubQr" alt="QR code to join the Iconic CUKI Club">
+          <div id="clubCta" class="qr-cta">SCAN TO JOIN</div>
+        </div>
+
+        <p id="clubFooter" class="club-footer">1 box. 1 stamp. More to look forward to.</p>
+        <div class="stamp-row" aria-hidden="true">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+          <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span>
+          <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+        </div>
+      </div>
+      <div class="navigation-hint light"><span>↑</span> SWIPE UP FOR THIS WEEK'S MENU</div>
+    </section>
+
+    <div id="gestureToast" class="gesture-toast"></div>
+
+    <div id="gestureDebug" class="gesture-debug hidden">
+      <canvas id="debugCanvas" width="320" height="240"></canvas>
+      <div id="debugText">Starting hand tracking…</div>
+      <small>G · hide preview</small>
+    </div>
+
+    <footer class="admin-footer">↑ menu · ↓ club · G camera preview · F11 fullscreen</footer>
+  </main>
+</div>
+<script type="module" src="/renderer.mjs"></script>
+</body>
+</html>
