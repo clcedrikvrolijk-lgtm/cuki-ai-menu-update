@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "updated_at": "2026-11-07",
+  "menu": {
+    "eyebrow": "THIS WEEK AT CUKI",
+    "date_label": "SATURDAY · NOVEMBER 7",
+    "title": "Your Saturday favorites.",
+    "subtitle": "Three signatures. Two rotating flavors. A little extra sweetness.",
+    "sections": [
+      {
+        "title": "SIGNATURES",
+        "items": [
+          "Biscoff Cheesecake CUKI",
+          "Fruity Pebbles White Chocolate CUKI",
+          "Oreo Brownie Chocolate CUKI"
+        ]
+      },
+      {
+        "title": "ROTATING THIS WEEK",
+        "items": [
+          "Ponche Crema Pistachio CUKI",
+          "Pineapple Coconut Cheesecake CUKI"
+        ]
+      },
+      {
+        "title": "EXTRAS",
+        "items": [
+          "Ice Cream CUKIs",
+          "Pan de Jamón Rolls"
+        ]
+      }
+    ]
+  },
+  "club": {
+    "title": "THE ICONIC CUKI CLUB",
+    "subtitle": "Good taste deserves perks.",
+    "join_url": "https://cuki-website.onrender.com/#club",
+    "cta": "SCAN TO JOIN",
+    "footer": "1 box. 1 stamp. More to look forward to."
+  },
+  "behavior": {
+    "refresh_minutes": 5,
+    "idle_return_seconds": 45,
+    "voice_enabled": false
+  }
+}
