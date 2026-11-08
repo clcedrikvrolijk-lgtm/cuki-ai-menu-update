@@ -12,7 +12,12 @@ const REMOTE_CONFIG = process.env.CUKI_DISPLAY_CONFIG_URL ||
 const qrFile = path.join(__dirname, 'media', 'payaw-original-qr.png');
 const POS_DEFAULT = 'https://cuki-pos.onrender.com';
 let recentPosCatalog = null;
+let recentPosDisplay = null;
 const photos = new Map();
+const displayMediaCache = new Map();
+let playerState = { current_item_key: null, current_type: null, current_screen: "menu" };
+let heartbeatTimer = null;
+const deviceFile = () => path.join(app.getPath('userData'), 'display-device.json');
 function posBaseUrl() {
   const local = safeReadJSON(path.join(__dirname,'pos-settings.json'));
   const base = process.env.CUKI_POS_URL || local?.base_url || POS_DEFAULT;
@@ -21,11 +26,12 @@ function posBaseUrl() {
     throw new Error('CUKI POS URL must use HTTPS');
   return parsed.origin;
 }
-async function posFetch(relativePath, timeoutMs=8000) {
+async function posFetch(relativePath, timeoutMs=8000, options={}) {
   const controller = new AbortController();
   const deadline = setTimeout(()=>controller.abort(),timeoutMs);
   try{
-    const r = await fetch(posBaseUrl()+relativePath,{signal:controller.signal,cache:'no-store',headers:{'Accept':'application/json, image/*','User-Agent':'CUKI-Display/1.3.5'}});
+    const r = await fetch(posBaseUrl()+relativePath,{...options,signal:controller.signal,cache:'no-store',
+      headers:{'Accept':'application/json, image/*','User-Agent':'CUKI-Display/1.3.6',...(options.headers||{})}});
     if(!r.ok) throw new Error('CUKI POS HTTP '+r.status+' for '+relativePath);
     return r;
   }finally{clearTimeout(deadline)}
@@ -43,6 +49,83 @@ async function posCatalog() {
     throw error;
   }
 }
+async function posDisplay() {
+  try {
+    const response = await posFetch('/api/menu/display', 8000);
+    const data = await response.json();
+    if (!Array.isArray(data.items)) throw new Error('POS display response has no playlist');
+    recentPosDisplay = data;
+    return { ...data, device_paired: !!safeReadJSON(deviceFile())?.device_token, _source: 'live' };
+  } catch (error) {
+    if (recentPosDisplay) return { ...recentPosDisplay, device_paired: !!safeReadJSON(deviceFile())?.device_token, _source: 'saved', _warning: error.message };
+    throw error;
+  }
+}
+async function pairDisplay(code) {
+  const response = await posFetch('/api/menu/display/pair', 10000, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code, device_name: 'CUKI Surface Pro' })
+  });
+  const data = await response.json();
+  if (!data.device_token) throw new Error('POS did not return a display token');
+  fs.mkdirSync(path.dirname(deviceFile()), { recursive: true });
+  fs.writeFileSync(deviceFile() + '.tmp', JSON.stringify(data), 'utf8');
+  fs.renameSync(deviceFile() + '.tmp', deviceFile());
+  await sendDisplayHeartbeat();
+  return { paired: true, device_name: data.device_name };
+}
+async function sendDisplayHeartbeat() {
+  const device = safeReadJSON(deviceFile());
+  if (!device?.device_token) return;
+  try {
+    await posFetch('/api/menu/display/heartbeat', 6000, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + device.device_token },
+      body: JSON.stringify({ ...playerState, app_version: '1.3.6' })
+    });
+  } catch (error) {
+    console.warn('CUKI display heartbeat failed:', error.message);
+  }
+}
+async function displayMedia(res, id) {
+  const key = String(id), saved = displayMediaCache.get(key);
+  if (saved && Date.now() - saved.at < 60000) {
+    res.writeHead(200, { 'Content-Type': saved.contentType, 'Content-Length': saved.data.length, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+    res.end(saved.data); return;
+  }
+  try {
+    const response = await posFetch('/api/menu/display/media/' + id, 20000);
+    const ct = (response.headers.get('content-type') || '').split(';')[0].trim().toLowerCase();
+    if (!['image/png','image/jpeg','image/webp','video/mp4','video/webm'].includes(ct)) throw new Error('Unsupported display media type');
+    const data = Buffer.from(await response.arrayBuffer());
+    if (!data.length || data.length > 50 * 1024 * 1024) throw new Error('Display media is empty or too large');
+    displayMediaCache.set(key, { data, contentType: ct, at: Date.now() });
+    res.writeHead(200, { 'Content-Type': ct, 'Content-Length': data.length, 'Cache-Control': 'no-store', 'X-Content-Type-Options': 'nosniff' });
+    res.end(data);
+  } catch (error) {
+    if (saved) {
+      res.writeHead(200, { 'Content-Type': saved.contentType, 'Content-Length': saved.data.length, 'Cache-Control': 'no-store' });
+      res.end(saved.data); return;
+    }
+    res.writeHead(404, { 'Content-Type': 'text/plain', 'Cache-Control': 'no-store' });
+    res.end('CUKI display media unavailable');
+  }
+}
+function readJsonBody(req, maxBytes = 12000) {
+  return new Promise((resolve, reject) => {
+    let body = '';
+    req.setEncoding('utf8');
+    req.on('data', chunk => {
+      body += chunk;
+      if (Buffer.byteLength(body) > maxBytes) { reject(new Error('Request body too large')); req.destroy(); }
+    });
+    req.on('end', () => {
+      try { resolve(JSON.parse(body || '{}')); } catch { reject(new Error('Invalid JSON body')); }
+    });
+    req.on('error', reject);
+  });
+}
+
 async function posReadyOrders() {
   const response = await posFetch('/api/kitchen/ready-display', 6000);
   const data = await response.json();
@@ -175,7 +258,40 @@ function handleServer() {
     let pathname;
     try {pathname=new URL(req.url,'http://localhost').pathname;}
     catch{res.writeHead(400);res.end('Invalid request');return;}
+    if (req.method === 'POST') {
+      if (pathname === '/api/pos/pair') {
+        try {
+          const body = await readJsonBody(req);
+          const result = await pairDisplay(String(body.code || '').trim());
+          res.writeHead(200, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+          res.end(JSON.stringify(result));
+        } catch (e) {
+          res.writeHead(400, { 'Content-Type': 'application/json; charset=utf-8', 'Cache-Control': 'no-store' });
+          res.end(JSON.stringify({ error: e.message }));
+        }
+        return;
+      }
+      if (pathname === '/api/pos/state') {
+        try {
+          const body = await readJsonBody(req);
+          playerState = {
+            current_item_key: typeof body.current_item_key === 'string' ? body.current_item_key.slice(0, 64) : null,
+            current_type: typeof body.current_type === 'string' ? body.current_type.slice(0, 20) : null,
+            current_screen: typeof body.current_screen === 'string' ? body.current_screen.slice(0, 30) : null
+          };
+          sendDisplayHeartbeat();
+          res.writeHead(204); res.end();
+        } catch (e) { res.writeHead(400); res.end('Invalid player state'); }
+        return;
+      }
+      res.writeHead(405); res.end('Method not allowed'); return;
+    }
     if(req.method!=='GET'){res.writeHead(405);res.end('Method not allowed');return;}
+    if(pathname==='/api/pos/display'){
+      try { const data=await posDisplay(); res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); res.end(JSON.stringify(data)); }
+      catch(e) { res.writeHead(502,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'}); res.end(JSON.stringify({error:e.message,items:[],device_paired:!!safeReadJSON(deviceFile())?.device_token})); }
+      return;
+    }
     if(pathname==='/api/pos/ready-orders'){
       try {const data=await posReadyOrders();res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
       catch(e){res.writeHead(502,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify({error:e.message,orders:[]}));}
@@ -188,6 +304,8 @@ function handleServer() {
     }
     const posPhotoMatch=pathname.match(/^\/api\/pos\/photo\/(\d{1,10})$/);
     if(posPhotoMatch){await posPhoto(res,Number(posPhotoMatch[1]));return;}
+    const displayMediaMatch=pathname.match(/^\/api\/pos\/media\/(\d{1,10})$/);
+    if(displayMediaMatch){await displayMedia(res,Number(displayMediaMatch[1]));return;}
     if(pathname==='/api/content'){
       try{const data=await displayContent();res.writeHead(200,{'Content-Type':'application/json; charset=utf-8','Cache-Control':'no-store'});res.end(JSON.stringify(data));}
       catch(e){res.writeHead(503,{'Content-Type':'application/json'});res.end(JSON.stringify({error:e.message}));}
@@ -228,5 +346,5 @@ function createWindow(port) {
   });
 }
 app.whenReady().then(handleServer);
-app.on('before-quit',()=>{isShuttingDown=true;voiceProcess?.kill();server?.close();for(const r of streams){try{r.end();}catch{}}});
+app.on('before-quit',()=>{isShuttingDown=true;clearInterval(heartbeatTimer);voiceProcess?.kill();server?.close();for(const r of streams){try{r.end();}catch{}}});
 app.on('window-all-closed',()=>{if(process.platform!=='darwin')app.quit();});
