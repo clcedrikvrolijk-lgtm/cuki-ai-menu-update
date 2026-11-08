@@ -230,9 +230,10 @@ function startReadyPolling(){
   readyPollTimer=setInterval(pollReadyOrders,5000);
 }
 function sendPlayerState(){
+  const payaw=current===2;
   fetch('/api/pos/state',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({current_item_key:currentDisplayKey,current_type:currentDisplayType,
-      current_screen:current===1?'club':current===2?'payaw':'menu'})}).catch(()=>{});
+    body:JSON.stringify({current_item_key:payaw?'payaw':currentDisplayKey,current_type:payaw?'payaw':currentDisplayType,
+      current_screen:current===1?'club':payaw?'payaw':'menu'})}).catch(()=>{});
 }
 function showScreen(next,toast=true,promotionSlide=false){
   current=clamp(next,0,2);
@@ -244,7 +245,7 @@ function showScreen(next,toast=true,promotionSlide=false){
   });
   if(toast)showToast(['THIS WEEK AT CUKI','THE ICONIC CUKI CLUB','PAY.AW · SCAN TO PAY'][current]);
   if(!publishedDisplayItems.length){resetIdle();refreshSlideTimer();}
-  else{clearTimeout(idleTimer);clearTimeout(slideTimer);}
+  else{clearTimeout(idleTimer);clearTimeout(slideTimer);if(current===2)clearTimeout(displayTimer);}
   sendPlayerState();
 }
 function hideRemoteMedia(){
@@ -355,7 +356,7 @@ function navigateByVoice(command){
   if(content.behavior?.voice_requests_enabled===false)return;
   if(command==='payaw'){
     if(content.payaw?.enabled!==false){
-      showScreen(2,false);showFeedback('PAY.AW READY');speakOnlyForVoiceRequest('Here is the Pay.aw QR code.');
+      clearTimeout(displayTimer);showScreen(2,false);showFeedback('PAY.AW READY');speakOnlyForVoiceRequest('Here is the Pay.aw QR code.');
       if(publishedDisplayItems.length)displayTimer=setTimeout(()=>showPublishedItem(activeDisplayIndex),idleSeconds()*1000);
     }
   }else if(command==='club'){
@@ -509,9 +510,15 @@ async function startHandTracking(){
   }catch(e){console.warn('Camera/gesture detection unavailable',e);el('debugText').textContent='GESTURES UNAVAILABLE';}
 }
 addEventListener('keydown',e=>{
-  if(e.key==='ArrowUp'||e.key.toLowerCase()==='m'){showScreen(0);return;}
-  if(e.key==='ArrowDown'||e.key.toLowerCase()==='c'){showScreen(1);return;}
-  if(e.key.toLowerCase()==='p'){showScreen(2);return;}
+  if(e.key==='ArrowUp'||e.key.toLowerCase()==='m'){
+    if(publishedDisplayItems.length){const i=publishedDisplayItems.findIndex(item=>item.type==='weekly_menu');showPublishedItem(i>=0?i:0);}
+    else showScreen(0);return;
+  }
+  if(e.key==='ArrowDown'||e.key.toLowerCase()==='c'){
+    if(publishedDisplayItems.length){const i=publishedDisplayItems.findIndex(item=>item.type==='club');if(i>=0)showPublishedItem(i);else showScreen(1);}
+    else showScreen(1);return;
+  }
+  if(e.key.toLowerCase()==='p'){clearTimeout(displayTimer);showScreen(2);if(publishedDisplayItems.length)displayTimer=setTimeout(()=>showPublishedItem(activeDisplayIndex),idleSeconds()*1000);return;}
   if(e.key.toLowerCase()==='g'){el('gestureDebug').classList.toggle('hidden');return;}
   if(e.key==='Escape'&&current===2){showScreen(0);return;}
 });
