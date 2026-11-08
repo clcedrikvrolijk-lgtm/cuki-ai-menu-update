@@ -97,6 +97,24 @@
       <div class="navigation-hint light"><span>↑</span> SWIPE UP TO RETURN TO THE MENU</div>
     </section>
 
+
+    <div id="remoteMedia" class="remote-media hidden" aria-label="Published CUKI promotion">
+      <img id="remoteImage" class="hidden" alt="CUKI promotion">
+      <video id="remoteVideo" class="hidden" muted autoplay playsinline></video>
+    </div>
+
+    <div id="pairPrompt" class="pair-prompt hidden" role="dialog" aria-modal="true" aria-labelledby="pairTitle">
+      <div class="pair-card">
+        <img src="/media/cuki-brand-header.png" alt="CUKI" class="pair-logo">
+        <span class="pair-kicker">CUKI AI DISPLAY</span>
+        <h2 id="pairTitle">Connect this Surface</h2>
+        <p>Enter the six-digit pairing code from the AI Display Manager in CUKI POS. This is a one-time setup.</p>
+        <input id="pairCodeInput" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="000000" aria-label="Six-digit pairing code">
+        <button id="pairButton" class="pair-primary">Connect to CUKI POS</button>
+        <button id="pairSkip" class="pair-skip">Not now</button>
+        <div id="pairStatus" role="status"></div>
+      </div>
+    </div>
     <div id="readyCallout" class="ready-callout hidden" role="status" aria-live="assertive">
       <div class="ready-card">
         <img class="ready-brand" src="/media/cuki-brand-header.png" alt="CUKI">
