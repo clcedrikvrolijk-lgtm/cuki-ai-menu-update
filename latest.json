@@ -8,42 +8,42 @@
     {
       "path": "index.html",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/index.html",
-      "sha256": "df9303a11713b44b1464e627c324918afd93a2785521d00f45b4758240370699"
+      "sha256": "bb6544ad0713512d1670c93f50295161f356e103ca02ba0c0cf3c9b962e510e1"
     },
     {
       "path": "style.css",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/style.css",
-      "sha256": "ce169e4ce86ea01d5886d5b2f21ac0b6a7d53a82a399298485b3fcf361462807"
+      "sha256": "2cd4dcbbd8eb26b8f510ee5864e41836387385f6ecc4dcac7adbe24879b8ea9c"
     },
     {
       "path": "renderer.mjs",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/renderer.mjs",
-      "sha256": "af11aa655ddbfd952d0f96f681601a405e40dad3b7475531fc0b45ed717a92b1"
+      "sha256": "4ffc64e48831febab01f23d5c8be68eefd324f123836fa252f7f3aa792a8c7f7"
     },
     {
       "path": "main.js",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/main.js",
-      "sha256": "04d0d42167c79dfe9baedd934035c8f434978a39ccb5b2670f111b5dd7267850"
+      "sha256": "f0b20c745d602b2472d34a735ecd3989921bb8d8faab6880773e75bfedf9b019"
     },
     {
       "path": "package.json",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/package.json",
-      "sha256": "f055def8b1c4536bbc34ad13c3822113379fff45c2c000c520ffd72565df5e07"
+      "sha256": "158fa4d1ba2b96aab88f4239e65bcc8411a5b9c681d0cadc002dac836948f8be"
     },
     {
       "path": "INSTALL_AND_START.bat",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/INSTALL_AND_START.bat",
-      "sha256": "4f689765e4bb910ad32495e9b8473d6cb3634b23e852dce470654ea522602d18"
+      "sha256": "1a5c696682b7b4ebbc77157613c4b3e6091d684b509761ed5dd41716aa831f82"
     },
     {
       "path": "START_CUKI.bat",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/START_CUKI.bat",
-      "sha256": "c916238e9eb1797fef203a54dc3753fbd15c26ff68dd8d4c1bdde76a35a6ea59"
+      "sha256": "05f2d14c74580dd6457b75aef1ee009708925fcb1dfffa8fdc356401370f4e16"
     },
     {
       "path": "README_FIRST.txt",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/README_FIRST.txt",
-      "sha256": "5c1b1aac778bdf6ed0bc4e3cb8157375b8128d7922a91ca16b369677910fe6c1"
+      "sha256": "f2fc845d28a4e914e3ddd7c20134cc88802998a5a2d536680c6814c8aa9338eb"
     },
     {
       "path": "display-content.json",
