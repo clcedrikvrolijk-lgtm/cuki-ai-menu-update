@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>CUKI Weekly Display</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div id="shell">
+  <main id="app">
+    <video id="visionCamera" autoplay muted playsinline></video>
+
+    <header class="topbar">
+      <img class="brand-logo" src="/media/cuki-brand-header.png" alt="CUKI">
+      <div class="top-status">
+        <span id="contentStatus" class="status-dot"></span>
+        <span id="contentStatusText">Loading weekly menu</span>
+      </div>
+    </header>
+
+    <section class="screen active menu-screen" data-screen="0">
+      <img id="menuPosterImage" class="menu-poster-image hidden" alt="CUKI weekly menu poster">
+      <div id="liveSlideshow" class="live-slideshow hidden" aria-live="off">
+        <div class="live-slide-header">
+          <div><span class="small-kicker">THE WEEKLY DROP</span><h1>THIS WEEK AT <em>CUKI.</em></h1></div>
+          <div id="slideNumber" class="slide-number">1 / 1</div>
+        </div>
+        <div class="live-photo-frame">
+          <img id="slidePhoto" alt="" />
+          <div id="photoFallback" class="photo-fallback hidden">
+            <img src="/media/cuki-brand-header.png" alt="CUKI" />
+            <p>HANDCRAFTED IN ARUBA</p>
+          </div>
+          <span id="slideBadge" class="live-badge">SIGNATURE</span>
+        </div>
+        <div class="live-slide-info">
+          <div id="slideCategory" class="slide-category">WEEKLY FAVORITE</div>
+          <h2 id="slideName">CUKI</h2>
+          <div class="slide-detail-footer"><strong id="slidePrice">AWG</strong><span id="slideAvailability">FRESHLY MADE</span></div>
+        </div>
+        <div class="slide-progress" id="slideProgress"></div>
+        <p class="slide-bottom-note">MADE WITH CARE · ENJOYED WITH INTENTION ♡</p>
+      </div>
+      <div class="poster" id="menuPoster">
+        <div class="poster-kicker" id="menuEyebrow">THIS WEEK AT CUKI</div>
+        <div class="poster-date" id="menuDate">SATURDAY</div>
+        <h1 id="menuTitle">Your Saturday favorites.</h1>
+        <p class="poster-subtitle" id="menuSubtitle"></p>
+        <div id="menuSections" class="menu-sections"></div>
+        <div class="poster-footer">
+          <span>@CUKICOMPANY</span>
+          <b>A TASTE OF CUKI</b>
+        </div>
+      </div>
+      <div class="navigation-hint"><span>↓</span> SWIPE DOWN FOR THE ICONIC CUKI CLUB</div>
+    </section>
+
+    <section class="screen club-screen" data-screen="1">
+      <div class="club-bg-word" aria-hidden="true">CLUB</div>
+      <div class="club-content">
+        <div class="club-kicker">CUKI · LOYALTY</div>
+        <h1 id="clubTitle">THE ICONIC<br>CUKI CLUB</h1>
+        <p id="clubSubtitle" class="club-subtitle">Good taste deserves perks.</p>
+
+        <div class="qr-card">
+          <img id="clubQr" alt="QR code to join the Iconic CUKI Club">
+          <div id="clubCta" class="qr-cta">SCAN TO JOIN</div>
+        </div>
+
+        <p id="clubFooter" class="club-footer">1 box. 1 stamp. More to look forward to.</p>
+        <div class="stamp-row" aria-hidden="true">
+          <span>01</span><span>02</span><span>03</span><span>04</span><span>05</span>
+          <span>06</span><span>07</span><span>08</span><span>09</span><span>10</span>
+          <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+        </div>
+      </div>
+      <div class="navigation-hint light"><span>↑</span> SWIPE UP FOR THIS WEEK'S MENU</div>
+    </section>
+
+    <section class="screen pay-screen" data-screen="2" aria-label="Pay.aw scan to pay">
+      <div class="payment-content">
+        <img src="/media/cuki-payment-logo.png" class="payment-logo" alt="CUKI">
+        <span class="payment-kicker">CUKI · SCAN TO PAY</span>
+        <h1>Pay with<br><em>pay.aw</em></h1>
+        <div class="payment-card">
+          <div class="merchant-name">Cuki Company</div>
+          <div class="merchant-number">0519102</div>
+          <div class="original-qr-frame">
+            <img src="/api/payaw/qr" class="payment-original-qr" alt="Original CUKI Company Pay.aw QR code">
+          </div>
+          <div class="scan-instruction">SCAN TO PAY</div>
+          <div class="payment-verify">Confirm the merchant and payment amount in the Pay.aw app before paying.</div>
+        </div>
+        <div class="payment-footer">A TASTE OF CUKI ♡</div>
+      </div>
+      <div class="navigation-hint light"><span>↑</span> SWIPE UP TO RETURN TO THE MENU</div>
+    </section>
+
+    <div id="readyCallout" class="ready-callout hidden" role="status" aria-live="assertive">
+      <div class="ready-card">
+        <img class="ready-brand" src="/media/cuki-brand-header.png" alt="CUKI">
+        <span class="ready-kicker">FRESH FROM THE KITCHEN</span>
+        <h1 id="readyHeading">YOUR ORDER IS READY!</h1>
+        <div id="readyOrderNumbers" class="ready-order-numbers">#024</div>
+        <p class="ready-message">Please collect your order at the counter.</p>
+        <span class="ready-footer">THANK YOU FOR CHOOSING CUKI ♡</span>
+      </div>
+    </div>
+
+    <div id="gestureToast" class="gesture-toast"></div>
+
+    <div id="gestureDebug" class="gesture-debug hidden">
+      <canvas id="debugCanvas" width="320" height="240"></canvas>
+      <div id="debugText">Starting hand tracking…</div>
+      <small>G · hide preview</small>
+    </div>
+
+    <div id="voiceFeedback" class="voice-feedback" aria-live="polite"></div>
+    <footer class="admin-footer">↑ menu · ↓ club · Say “Hey CUKI, show payment” · P payment · G hand preview · F11 fullscreen</footer>
+  </main>
+</div>
+<script type="module" src="/renderer.mjs"></script>
+</body>
+</html>
