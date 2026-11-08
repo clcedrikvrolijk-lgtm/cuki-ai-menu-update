@@ -7,12 +7,6 @@ const feedback=el('voiceFeedback');
 const readyCallout=el('readyCallout');
 const readyHeading=el('readyHeading');
 const readyOrderNumbers=el('readyOrderNumbers');
-const mediaDisplay=el('remoteMedia');
-const remoteImage=el('remoteImage');
-const remoteVideo=el('remoteVideo');
-const pairPrompt=el('pairPrompt');
-const pairCodeInput=el('pairCodeInput');
-const pairStatus=el('pairStatus');
 const debugCanvas=el('debugCanvas');
 const debugCtx=debugCanvas.getContext('2d');
 const displayWidth=1080,displayHeight=1920;
@@ -38,14 +32,6 @@ let lastProductSignature='';
 const SLIDE_INTERVAL=7000;
 const PROMOTION_INTERVAL=60000;
 let automaticSlide=false;
-let publishedDisplayItems=[];
-let activeDisplayIndex=0;
-let currentDisplayKey=null;
-let currentDisplayType=null;
-let displayTimer=null;
-let displaySignature='';
-let weeklySlideDurationMs=SLIDE_INTERVAL;
-let pairDismissed=false;
 
 let current=0;
 let gestureRecognizer=null;
@@ -87,7 +73,6 @@ function idleSeconds(){
 }
 function resetIdle(){
   clearTimeout(idleTimer);
-  if(publishedDisplayItems.length)return;
   if(automaticSlide || current!==0){
     idleTimer=setTimeout(()=>{
       if(automaticSlide && current===1 && content.payaw?.enabled!==false){
@@ -100,7 +85,6 @@ function resetIdle(){
 }
 function refreshSlideTimer(){
   clearTimeout(slideTimer);
-  if(publishedDisplayItems.length){slideTimer=null;return;}
   slideTimer=null;
   if(current!==0 || !posReady || !posProducts.length)return;
   slideTimer=setTimeout(()=>{
@@ -165,14 +149,11 @@ async function pollPos(){
     }
     posReady=true;
     if(!slideTimer)refreshSlideTimer();
-    if(!publishedDisplayItems.length || currentDisplayType==='weekly_menu')renderSlide();
-    if(currentDisplayType!=='media'){
-      el('liveSlideshow').classList.remove('hidden');
-      el('menuPoster').classList.add('hidden');
-      el('menuPosterImage').classList.add('hidden');
-    }
+    renderSlide();
+    el('liveSlideshow').classList.remove('hidden');
+    el('menuPoster').classList.add('hidden');
+    el('menuPosterImage').classList.add('hidden');
     setStatus(d._source==='live'?'LIVE · CUKI POS':'Saved POS menu',d._source==='live'?'live':'offline');
-    if(currentDisplayType==='weekly_menu' && posProducts.length && !displayTimer)showPublishedItem(activeDisplayIndex);
   }catch(e){
     console.warn('Live CUKI POS refresh failed:',e.message);
     if(posProducts.length){posReady=true;setStatus('Last POS menu · offline','offline');return;}
@@ -229,11 +210,6 @@ function startReadyPolling(){
   pollReadyOrders();
   readyPollTimer=setInterval(pollReadyOrders,5000);
 }
-function sendPlayerState(){
-  fetch('/api/pos/state',{method:'POST',headers:{'Content-Type':'application/json'},
-    body:JSON.stringify({current_item_key:currentDisplayKey,current_type:currentDisplayType,
-      current_screen:current===1?'club':current===2?'payaw':'menu'})}).catch(()=>{});
-}
 function showScreen(next,toast=true,promotionSlide=false){
   current=clamp(next,0,2);
   automaticSlide=promotionSlide;
@@ -243,102 +219,9 @@ function showScreen(next,toast=true,promotionSlide=false){
     if(index<current)screen.classList.add('before');
   });
   if(toast)showToast(['THIS WEEK AT CUKI','THE ICONIC CUKI CLUB','PAY.AW · SCAN TO PAY'][current]);
-  if(!publishedDisplayItems.length){resetIdle();refreshSlideTimer();}
-  else{clearTimeout(idleTimer);clearTimeout(slideTimer);}
-  sendPlayerState();
+  resetIdle();
+  refreshSlideTimer();
 }
-function hideRemoteMedia(){
-  mediaDisplay.classList.add('hidden');
-  remoteVideo.pause();remoteVideo.removeAttribute('src');remoteVideo.load();
-  remoteImage.removeAttribute('src');
-}
-function advancePublishedDisplay(){
-  if(!publishedDisplayItems.length)return;
-  showPublishedItem((activeDisplayIndex+1)%publishedDisplayItems.length);
-}
-function advanceWeeklyMenuSlide(){
-  if(activeSlideIndex<posProducts.length-1){
-    activeSlideIndex++;renderSlide();sendPlayerState();
-    displayTimer=setTimeout(advanceWeeklyMenuSlide,weeklySlideDurationMs);
-  }else advancePublishedDisplay();
-}
-function showPublishedItem(index){
-  if(!publishedDisplayItems.length)return;
-  clearTimeout(displayTimer);
-  activeDisplayIndex=clamp(index,0,publishedDisplayItems.length-1);
-  const item=publishedDisplayItems[activeDisplayIndex];
-  currentDisplayKey=item.key||null;currentDisplayType=item.type||null;
-  if(item.type==='media'){
-    showScreen(0,false);
-    el('liveSlideshow').classList.add('hidden');el('menuPoster').classList.add('hidden');
-    el('menuPosterImage').classList.add('hidden');mediaDisplay.classList.remove('hidden');
-    const url='/api/pos/media/'+Number(item.media_id);
-    if(item.media_type==='video'){
-      remoteImage.classList.add('hidden');remoteVideo.classList.remove('hidden');
-      remoteVideo.pause();remoteVideo.src=url;remoteVideo.loop=true;remoteVideo.muted=true;
-      remoteVideo.play().catch(error=>console.warn('Display video autoplay failed',error));
-    }else{
-      remoteVideo.pause();remoteVideo.classList.add('hidden');remoteVideo.removeAttribute('src');remoteVideo.load();
-      remoteImage.classList.remove('hidden');remoteImage.src=url;
-    }
-    displayTimer=setTimeout(advancePublishedDisplay,clamp(Number(item.duration_seconds)||15,3,120)*1000);
-  }else if(item.type==='weekly_menu'){
-    weeklySlideDurationMs=clamp(Number(item.duration_seconds)||7,3,120)*1000;
-    hideRemoteMedia();showScreen(0,false);
-    el('menuPosterImage').classList.add('hidden');el('menuPoster').classList.add('hidden');
-    el('liveSlideshow').classList.remove('hidden');
-    if(posProducts.length){activeSlideIndex=0;renderSlide();displayTimer=setTimeout(advanceWeeklyMenuSlide,SLIDE_INTERVAL);}
-    else{setStatus('Waiting for weekly POS menu','offline');displayTimer=setTimeout(advancePublishedDisplay,5000);}
-  }else if(item.type==='club'){
-    hideRemoteMedia();showScreen(1,false);
-    displayTimer=setTimeout(advancePublishedDisplay,clamp(Number(item.duration_seconds)||15,3,120)*1000);
-  }
-  sendPlayerState();
-}
-async function pollDisplayPlaylist(){
-  try{
-    const response=await fetch('/api/pos/display',{cache:'no-store'});
-    const data=await response.json();
-    if(!response.ok)throw new Error(data.error||'Display playlist unavailable');
-    if(data.device_paired){pairPrompt.classList.add('hidden');}
-    else if(!pairDismissed){pairPrompt.classList.remove('hidden');}
-    const next=Array.isArray(data.items)?data.items.filter(item=>item&&item.enabled!==false):[];
-    const signature=JSON.stringify(next);
-    if(signature!==displaySignature){
-      const previousKey=publishedDisplayItems[activeDisplayIndex]?.key;
-      publishedDisplayItems=next;displaySignature=signature;
-      const found=publishedDisplayItems.findIndex(item=>item.key===previousKey);
-      activeDisplayIndex=found>=0?found:0;
-      clearTimeout(displayTimer);
-      if(publishedDisplayItems.length)showPublishedItem(activeDisplayIndex);
-      else{
-        currentDisplayKey=null;currentDisplayType=null;hideRemoteMedia();
-        el('liveSlideshow').classList.remove('hidden');el('menuPoster').classList.add('hidden');
-        showScreen(0,false);
-      }
-    }
-  }catch(error){console.warn('CUKI live display playlist refresh failed:',error.message);}
-}
-function startDisplayPolling(){
-  pollDisplayPlaylist();
-  setInterval(pollDisplayPlaylist,5000);
-}
-async function pairSurface(){
-  const code=(pairCodeInput.value||'').replace(/\D/g,'').slice(0,8);
-  if(code.length!==8){pairStatus.textContent='Enter the eight-digit code from CUKI POS.';return;}
-  pairStatus.textContent='Connecting to CUKI POS…';
-  try{
-    const response=await fetch('/api/pos/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code})});
-    const data=await response.json();
-    if(!response.ok)throw new Error(data.error||'Pairing failed');
-    pairStatus.textContent='Connected to CUKI POS.';
-    pairPrompt.classList.add('hidden');pairCodeInput.value='';pairDismissed=false;
-    showFeedback('SURFACE CONNECTED');pollDisplayPlaylist();
-  }catch(error){pairStatus.textContent=error.message;}
-}
-el('pairButton').addEventListener('click',pairSurface);
-el('pairSkip').addEventListener('click',()=>{pairDismissed=true;pairPrompt.classList.add('hidden');});
-pairCodeInput.addEventListener('keydown',event=>{if(event.key==='Enter')pairSurface();});
 function speakOnlyForVoiceRequest(text){
   // The app never speaks on launch, gestures, idle, refresh or keyboard shortcuts.
   // Speak one short response only when a recognized voice request arrives.
@@ -354,18 +237,11 @@ function speakOnlyForVoiceRequest(text){
 function navigateByVoice(command){
   if(content.behavior?.voice_requests_enabled===false)return;
   if(command==='payaw'){
-    if(content.payaw?.enabled!==false){
-      showScreen(2,false);showFeedback('PAY.AW READY');speakOnlyForVoiceRequest('Here is the Pay.aw QR code.');
-      if(publishedDisplayItems.length)displayTimer=setTimeout(()=>showPublishedItem(activeDisplayIndex),idleSeconds()*1000);
-    }
+    if(content.payaw?.enabled!==false){showScreen(2,false);showFeedback('PAY.AW READY');speakOnlyForVoiceRequest('Here is the Pay.aw QR code.');}
   }else if(command==='club'){
-    const index=publishedDisplayItems.findIndex(item=>item.type==='club');
-    if(index>=0)showPublishedItem(index);else showScreen(1,false);
-    showFeedback('CUKI CLUB');speakOnlyForVoiceRequest('Scan to join CUKI Club.');
+    showScreen(1,false);showFeedback('CUKI CLUB');speakOnlyForVoiceRequest('Scan to join CUKI Club.');
   }else if(command==='menu'){
-    const index=publishedDisplayItems.findIndex(item=>item.type==='weekly_menu');
-    if(index>=0)showPublishedItem(index);else showScreen(0,false);
-    showFeedback('WEEKLY MENU');speakOnlyForVoiceRequest('Here is this week’s menu.');
+    showScreen(0,false);showFeedback('WEEKLY MENU');speakOnlyForVoiceRequest('Here is this week’s menu.');
   }
 }
 function connectVoice(){
@@ -477,16 +353,6 @@ function processGestures(result,now){
   if(now<cooldownUntil)return;
   const direction=recognizeSwipe(now);if(!direction)return;
   handHistory=[];cooldownUntil=now+1500;
-  if(publishedDisplayItems.length){
-    if(direction==='up'){
-      const index=publishedDisplayItems.findIndex(item=>item.type==='weekly_menu');
-      showPublishedItem(index>=0?index:0);
-    }else if(current!==1){
-      const index=publishedDisplayItems.findIndex(item=>item.type==='club');
-      if(index>=0)showPublishedItem(index);else showScreen(1);
-    }
-    return;
-  }
   if(direction==='up')showScreen(0);
   else if(current===0)showScreen(1);
   // A downward swipe on the Club screen does not open Pay.aw.
@@ -517,4 +383,4 @@ addEventListener('keydown',e=>{
 });
 document.addEventListener('click',()=>{if(!automaticSlide)resetIdle();});
 connectVoice();
-await refreshContent();scheduleRefresh();showScreen(0,false);startPosPolling();startDisplayPolling();startReadyPolling();startHandTracking();
+await refreshContent();scheduleRefresh();showScreen(0,false);startPosPolling();startReadyPolling();startHandTracking();
