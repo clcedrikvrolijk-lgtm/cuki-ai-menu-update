@@ -4,19 +4,14 @@ Update channel for **CUKI AI Menu**.
 
 This public repository lets the Surface update CUKI AI Menu without manually downloading a new ZIP for every change.
 
-## v1.0.0
-- Completely redesigned interface
-- Live product names, categories, prices and availability from the existing CUKI POS/PostgreSQL backend
-- No product-picture dependency yet
-- Box-of-3 builder for boxed CUKI products
-- Local customer cart using live POS prices
-- Concise Coral voice assistant with live-menu tools
-- Direction-focused hand gestures + calibration
-- Selfie + temporary QR pickup
-- Monitor fit controls
+## v1.3.5
+- Live CUKI POS product-photo slideshow, current prices and availability
+- Silent order-ready callout from the POS Kitchen, showing order number only
+- Weekly menu, Iconic CUKI Club QR and voice-requested Pay.aw screen
+- Remote updates through the GitHub updater
 
 ## Current stable version
-**v1.0.0**
+**v1.3.5**
 
 ## One-time setup on the Surface
 Open PowerShell inside the main CUKI AI Menu folder (the folder that contains `app`, `START_CUKI.bat`, and `CUKI_UPDATER.ps1`) and run:
