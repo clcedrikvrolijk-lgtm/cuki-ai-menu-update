@@ -1,34 +1,49 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.4",
-  "published_at": "2026-11-07",
-  "notes": "Show Pay.aw for one minute after the CUKI Club slide, with the pink CUKI logo on the payment screen.",
+  "version": "1.3.5",
+  "published_at": "2026-11-08",
+  "notes": "Live, silent CUKI POS Kitchen callout when an order is marked ready. Shows order number only, then returns to the current display. No speech or sound.",
   "files": [
     {
       "path": "index.html",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.4/index.html",
-      "sha256": "e098791ea212ebd6d21fd531d8d0917d5886eeaf1053fa0152418b1f5d70b648"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/index.html",
+      "sha256": "4b29ac907af2f42d72121d277868fd7344baa9324a95dec7a55379207eb35a34"
     },
     {
       "path": "style.css",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.4/style.css",
-      "sha256": "e8749b3145e3dd49ebbe661376bc134a24b9dcc1bae10abd355865338b6525ce"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/style.css",
+      "sha256": "5473d0c98162c9c69294da155c5cca4dde32898582f84e5e6df03815dd7ee8f2"
     },
     {
       "path": "renderer.mjs",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.4/renderer.mjs",
-      "sha256": "ece1f47e8ca826663aa8eb2c1383da811354bb5d9cf959e108cbca8ad43d6f25"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/renderer.mjs",
+      "sha256": "79e776af25433184027056e38fad4bc0a6a95348cf6f1251bf22f82cd141e91f"
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.2/main.js",
-      "sha256": "226cb56750bc4cb253a64d36198f99f301173a068b918fe68ed74ce0bfd98fc1"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/main.js",
+      "sha256": "d2048b3722ed16b2124efc08ccd75e2603f3f0de7c47c812a2e232e03e2c4423"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.4/package.json",
-      "sha256": "f3ac03fc3f90d49642ea1024e9857e63bd4f49a998ff1dd32b434c01c5a27540"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/package.json",
+      "sha256": "7b09834634f65b0fb0fb0371a8897467bf401760a2c67234b37975bf52d3e52c"
+    },
+    {
+      "path": "README_FIRST.txt",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/README_FIRST.txt",
+      "sha256": "e4eec05ba2523310c93ac03e86a488228530712fbc2292234b74c2150bf17cbe"
+    },
+    {
+      "path": "INSTALL_AND_START.bat",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/INSTALL_AND_START.bat",
+      "sha256": "f5a6cb6101a02138d8a1128bca61e9de7e719526ffeb80813271a631b08560ba"
+    },
+    {
+      "path": "START_CUKI.bat",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/START_CUKI.bat",
+      "sha256": "019dc78294ef2579c8ab3a302b6210529d3633e6a88482bbe2534c1d07f84265"
     },
     {
       "path": "display-content.json",
@@ -36,24 +51,9 @@
       "sha256": "1f93b65432a8d3e1c6e33855afbaac47f0a9829a4cf55ff1a1370096dd5b677d"
     },
     {
-      "path": "README_FIRST.txt",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.4/README_FIRST.txt",
-      "sha256": "3ee8128bf39791e9ad3e7df947082e714bed4df4b9fa9a8275ba9b4de9391b50"
-    },
-    {
       "path": "speech-listener.ps1",
       "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/speech-listener.ps1",
       "sha256": "761df74b0c0f0556273698f66b6397e704bae15e99dfea6c34f99d01b6446ce6"
-    },
-    {
-      "path": "START_CUKI.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/START_CUKI.bat",
-      "sha256": "297d25bf021ab39234b67942fe8b5dbab267a1f42b6cce429b76354873b2c63b"
-    },
-    {
-      "path": "INSTALL_AND_START.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.1/INSTALL_AND_START.bat",
-      "sha256": "5688bd7cb397e8ee94d3682268bbfcf4796390cad9391aceb7aa0f9c17e9277b"
     },
     {
       "path": "media/payaw-original-qr.png",
