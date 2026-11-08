@@ -331,7 +331,12 @@ function handleServer() {
     serveFile(res,file);
   });
   server.on('error',e=>{console.error('CUKI local server failed:',e);app.quit();});
-  server.listen(0,HOST,()=>{createWindow(server.address().port);launchSpeechListener();});
+  server.listen(0,HOST,()=>{
+      createWindow(server.address().port);launchSpeechListener();
+      clearInterval(heartbeatTimer);
+      heartbeatTimer=setInterval(sendDisplayHeartbeat,10000);
+      sendDisplayHeartbeat();
+    });
 }
 function createWindow(port) {
   const origin=`http://${HOST}:${port}`;
