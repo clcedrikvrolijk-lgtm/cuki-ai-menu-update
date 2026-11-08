@@ -44,6 +44,7 @@ let currentDisplayKey=null;
 let currentDisplayType=null;
 let displayTimer=null;
 let displaySignature='';
+let weeklySlideDurationMs=SLIDE_INTERVAL;
 let pairDismissed=false;
 
 let current=0;
@@ -258,7 +259,7 @@ function advancePublishedDisplay(){
 function advanceWeeklyMenuSlide(){
   if(activeSlideIndex<posProducts.length-1){
     activeSlideIndex++;renderSlide();sendPlayerState();
-    displayTimer=setTimeout(advanceWeeklyMenuSlide,SLIDE_INTERVAL);
+    displayTimer=setTimeout(advanceWeeklyMenuSlide,weeklySlideDurationMs);
   }else advancePublishedDisplay();
 }
 function showPublishedItem(index){
@@ -282,6 +283,7 @@ function showPublishedItem(index){
     }
     displayTimer=setTimeout(advancePublishedDisplay,clamp(Number(item.duration_seconds)||15,3,120)*1000);
   }else if(item.type==='weekly_menu'){
+    weeklySlideDurationMs=clamp(Number(item.duration_seconds)||7,3,120)*1000;
     hideRemoteMedia();showScreen(0,false);
     el('menuPosterImage').classList.add('hidden');el('menuPoster').classList.add('hidden');
     el('liveSlideshow').classList.remove('hidden');
