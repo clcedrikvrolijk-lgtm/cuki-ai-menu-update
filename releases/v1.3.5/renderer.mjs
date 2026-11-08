@@ -322,8 +322,8 @@ function startDisplayPolling(){
   setInterval(pollDisplayPlaylist,5000);
 }
 async function pairSurface(){
-  const code=(pairCodeInput.value||'').replace(/\D/g,'').slice(0,6);
-  if(code.length!==6){pairStatus.textContent='Enter the six-digit code from CUKI POS.';return;}
+  const code=(pairCodeInput.value||'').replace(/\D/g,'').slice(0,8);
+  if(code.length!==8){pairStatus.textContent='Enter the eight-digit code from CUKI POS.';return;}
   pairStatus.textContent='Connecting to CUKI POS…';
   try{
     const response=await fetch('/api/pos/pair',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code})});
