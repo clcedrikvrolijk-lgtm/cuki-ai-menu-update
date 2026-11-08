@@ -1,49 +1,49 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.5",
+  "version": "1.3.6",
   "published_at": "2026-11-08",
-  "notes": "Live, silent CUKI POS Kitchen callout when an order is marked ready. Shows order number only, then returns to the current display. No speech or sound.",
+  "notes": "Remote CUKI POS display manager: upload images/videos, edit and publish playlists, view draft/live previews, and pair the Surface for live status. Published changes reach the player without downloading the app.",
   "files": [
     {
       "path": "index.html",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/index.html",
-      "sha256": "4b29ac907af2f42d72121d277868fd7344baa9324a95dec7a55379207eb35a34"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/index.html",
+      "sha256": "11fd462fd4c544d41026f9c3784418f85edcb51003075e21e2600f407a1bde45"
     },
     {
       "path": "style.css",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/style.css",
-      "sha256": "5473d0c98162c9c69294da155c5cca4dde32898582f84e5e6df03815dd7ee8f2"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/style.css",
+      "sha256": "ce169e4ce86ea01d5886d5b2f21ac0b6a7d53a82a399298485b3fcf361462807"
     },
     {
       "path": "renderer.mjs",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/renderer.mjs",
-      "sha256": "79e776af25433184027056e38fad4bc0a6a95348cf6f1251bf22f82cd141e91f"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/renderer.mjs",
+      "sha256": "d0b150efd2ea23717ad2c6bde7a0d6c3996f78125cadf420f72a9a652ac8dae5"
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/main.js",
-      "sha256": "d2048b3722ed16b2124efc08ccd75e2603f3f0de7c47c812a2e232e03e2c4423"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/main.js",
+      "sha256": "04d0d42167c79dfe9baedd934035c8f434978a39ccb5b2670f111b5dd7267850"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/package.json",
-      "sha256": "7b09834634f65b0fb0fb0371a8897467bf401760a2c67234b37975bf52d3e52c"
-    },
-    {
-      "path": "README_FIRST.txt",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/README_FIRST.txt",
-      "sha256": "e4eec05ba2523310c93ac03e86a488228530712fbc2292234b74c2150bf17cbe"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/package.json",
+      "sha256": "f055def8b1c4536bbc34ad13c3822113379fff45c2c000c520ffd72565df5e07"
     },
     {
       "path": "INSTALL_AND_START.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/INSTALL_AND_START.bat",
-      "sha256": "f5a6cb6101a02138d8a1128bca61e9de7e719526ffeb80813271a631b08560ba"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/INSTALL_AND_START.bat",
+      "sha256": "4f689765e4bb910ad32495e9b8473d6cb3634b23e852dce470654ea522602d18"
     },
     {
       "path": "START_CUKI.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.5/START_CUKI.bat",
-      "sha256": "019dc78294ef2579c8ab3a302b6210529d3633e6a88482bbe2534c1d07f84265"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/START_CUKI.bat",
+      "sha256": "c916238e9eb1797fef203a54dc3753fbd15c26ff68dd8d4c1bdde76a35a6ea59"
+    },
+    {
+      "path": "README_FIRST.txt",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/README_FIRST.txt",
+      "sha256": "5c1b1aac778bdf6ed0bc4e3cb8157375b8128d7922a91ca16b369677910fe6c1"
     },
     {
       "path": "display-content.json",
