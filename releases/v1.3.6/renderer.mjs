@@ -238,6 +238,7 @@ function sendPlayerState(){
 function showScreen(next,toast=true,promotionSlide=false){
   current=clamp(next,0,2);
   automaticSlide=promotionSlide;
+  if(current!==0)hideRemoteMedia();
   screens.forEach((screen,index)=>{
     screen.classList.remove('active','before');
     if(index===current)screen.classList.add('active');
