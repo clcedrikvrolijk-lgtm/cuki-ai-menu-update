@@ -1,49 +1,49 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.6",
-  "published_at": "2026-11-08",
-  "notes": "Remote CUKI POS display manager: upload images/videos, edit and publish playlists, view draft/live previews, and pair the Surface for live status. Published changes reach the player without downloading the app.",
+  "version": "1.3.7",
+  "published_at": "2026-11-13",
+  "notes": "Owner-controlled AI Voice On/Off in CUKI POS. Turning voice off stops Windows voice listening and speaking, while preserving slideshow, gestures and silent kitchen-ready callouts. Fix display duration editing.",
   "files": [
     {
       "path": "index.html",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/index.html",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/index.html",
       "sha256": "11fd462fd4c544d41026f9c3784418f85edcb51003075e21e2600f407a1bde45"
     },
     {
       "path": "style.css",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/style.css",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/style.css",
       "sha256": "ce169e4ce86ea01d5886d5b2f21ac0b6a7d53a82a399298485b3fcf361462807"
     },
     {
       "path": "renderer.mjs",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/renderer.mjs",
-      "sha256": "d0b150efd2ea23717ad2c6bde7a0d6c3996f78125cadf420f72a9a652ac8dae5"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/renderer.mjs",
+      "sha256": "249fa0c4c7829a61bcdbf17bca2606f21f912c761005e38b5c2a12d171c37f1f"
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/main.js",
-      "sha256": "04d0d42167c79dfe9baedd934035c8f434978a39ccb5b2670f111b5dd7267850"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/main.js",
+      "sha256": "85592a6cd7e96259e2eb577f0398646fe26b73527c9ed03ee51c4e21252b2f11"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/package.json",
-      "sha256": "f055def8b1c4536bbc34ad13c3822113379fff45c2c000c520ffd72565df5e07"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/package.json",
+      "sha256": "d2d5f47c822352245a1bc0ecff458d04dc3cbbef78adf94dc290f689ba7458d2"
     },
     {
       "path": "INSTALL_AND_START.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/INSTALL_AND_START.bat",
-      "sha256": "4f689765e4bb910ad32495e9b8473d6cb3634b23e852dce470654ea522602d18"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/INSTALL_AND_START.bat",
+      "sha256": "09f8c07f8f89fcf375453f4a7d43ca51e83b5ba32b2d74ad0b35b08dbe864f5d"
     },
     {
       "path": "START_CUKI.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/START_CUKI.bat",
-      "sha256": "c916238e9eb1797fef203a54dc3753fbd15c26ff68dd8d4c1bdde76a35a6ea59"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/START_CUKI.bat",
+      "sha256": "51cc590476990564685c114efdeaf71b25ec24c731708bc00e2be02f36545b07"
     },
     {
       "path": "README_FIRST.txt",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.6/README_FIRST.txt",
-      "sha256": "5c1b1aac778bdf6ed0bc4e3cb8157375b8128d7922a91ca16b369677910fe6c1"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.7/README_FIRST.txt",
+      "sha256": "0473b3e88fad5d5db5b5a12c2eb48a2fcb3ee020b6462d6c5ab756372b7c3504"
     },
     {
       "path": "display-content.json",
