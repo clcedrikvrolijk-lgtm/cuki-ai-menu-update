@@ -304,8 +304,8 @@ async function pollDisplayPlaylist(){
     const data=await response.json();
     if(!response.ok)throw new Error(data.error||'Display playlist unavailable');
     if(data.device_paired){pairPrompt.classList.add('hidden');}
-    applyRemoteVoiceSetting(data.voice_enabled !== false);
     else if(!pairDismissed){pairPrompt.classList.remove('hidden');}
+    applyRemoteVoiceSetting(data.voice_enabled !== false);
     const next=Array.isArray(data.items)?data.items.filter(item=>item&&item.enabled!==false):[];
     const signature=JSON.stringify(next);
     if(signature!==displaySignature){
