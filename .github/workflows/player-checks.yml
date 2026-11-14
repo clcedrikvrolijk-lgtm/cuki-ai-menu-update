@@ -2,7 +2,7 @@ name: CUKI AI Menu player checks
 
 on:
   push:
-    branches: [feature/cuki-live-display-manager]
+    branches: [feature/ai-display-voice-toggle-duration-fix]
   pull_request:
   workflow_dispatch:
 
@@ -21,20 +21,20 @@ jobs:
           node-version: "24"
       - name: Check Electron main and renderer syntax
         run: |
-          node --check releases/v1.3.6/main.js
-          node --check releases/v1.3.6/renderer.mjs
+          node --check releases/v1.3.7/main.js
+          node --check releases/v1.3.7/renderer.mjs
       - name: Validate package and updater manifest
         run: |
           node --input-type=module <<'NODE'
           import fs from 'node:fs';
           import crypto from 'node:crypto';
-          const pkg = JSON.parse(fs.readFileSync('releases/v1.3.6/package.json', 'utf8'));
+          const pkg = JSON.parse(fs.readFileSync('releases/v1.3.7/package.json', 'utf8'));
           const manifest = JSON.parse(fs.readFileSync('latest.json', 'utf8'));
-          if (pkg.version !== '1.3.6' || manifest.version !== '1.3.6') throw new Error('Version mismatch');
-          for (const entry of manifest.files.filter(x => x.url.includes('/v1.3.6/'))) {
-            const file = 'releases/v1.3.6/' + entry.path;
+          if (pkg.version !== '1.3.7' || manifest.version !== '1.3.7') throw new Error('Version mismatch');
+          for (const entry of manifest.files.filter(x => x.url.includes('/v1.3.7/'))) {
+            const file = 'releases/v1.3.7/' + entry.path;
             const hash = crypto.createHash('sha256').update(fs.readFileSync(file)).digest('hex');
             if (hash !== entry.sha256) throw new Error('SHA-256 mismatch: ' + file);
           }
-          console.log('CUKI AI Menu v1.3.6 manifest and file hashes are valid.');
+          console.log('CUKI AI Menu v1.3.7 manifest and file hashes are valid.');
           NODE
