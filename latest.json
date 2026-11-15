@@ -1,49 +1,49 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.9",
+  "version": "1.3.10",
   "published_at": "2026-11-14",
-  "notes": "Temporarily disables hand swiping and camera tracking. Keyboard navigation and POS controls remain available.",
+  "notes": "Fix kitchen READY callouts: show customer receipt daily number, detect new orders after network delays without relying on the Surface clock; preserve slideshow and Pay.aw.",
   "files": [
     {
       "path": "index.html",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/index.html",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/index.html",
       "sha256": "f5e1962eb6f1ff682903a6735f3adaefe73a2bc55b59c615fd56d616986dee23"
     },
     {
       "path": "style.css",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/style.css",
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/style.css",
       "sha256": "0a470dbff888636465fbaa1f07c0110da940d68329ee7dfb520194b9acf42476"
     },
     {
       "path": "renderer.mjs",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/renderer.mjs",
-      "sha256": "04ab00cb2d83986cda753381aaa2b9602df740280670258c639138669b1218bc"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/renderer.mjs",
+      "sha256": "d00c349dc0903ae331a4b107c9ce3c4cdf0b2d968844b0b072411355ff6bc277"
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/main.js",
-      "sha256": "fc5033568beb52f145b5ea72df257199f125aaf80c2c9ca30002cf95f77b0f7d"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/main.js",
+      "sha256": "c55fcc59234a3a4617b45649b5b435e0ffb269b3471c9cc751b2e41dfa6ae774"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/package.json",
-      "sha256": "00c1c94ee116acb3ac22b0f062c0b6e7ea2d0f8c1a3cdf26167f5dcb3a2476d8"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/package.json",
+      "sha256": "26d9e121f0317d8efdf0d99d20291d4bc9371ecc5803231707ea745f7e38fd02"
     },
     {
       "path": "INSTALL_AND_START.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/INSTALL_AND_START.bat",
-      "sha256": "e14c8c49c5267a73de2e93661138f5a21c8dc65a7175ca2074a5373f14a72b29"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/INSTALL_AND_START.bat",
+      "sha256": "07ceb9806ef3f82cbb756c3c119f06239353431d294788e82522b025f6af8a1f"
     },
     {
       "path": "START_CUKI.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/START_CUKI.bat",
-      "sha256": "961ba263759814ab7cb75fecdcee503fd6831061fc63208acbe8033bec16cfb3"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/START_CUKI.bat",
+      "sha256": "090fbc59745af0f7a9b0bbb66e8aeb49700b0364e1ebc76c3efe8d92120b99db"
     },
     {
       "path": "README_FIRST.txt",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.9/README_FIRST.txt",
-      "sha256": "bec31a719ec568b491e1cde522952399226f227fa6a5af25cd3801968883d626"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.10/README_FIRST.txt",
+      "sha256": "395118155eb0c7fcabddeaed0b526fd2a4773af9722d1c816f2ad73d9f44c8b8"
     },
     {
       "path": "display-content.json",
