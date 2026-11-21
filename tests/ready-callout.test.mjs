@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { test } from 'node:test';
 
-const player = fs.readFileSync('releases/v1.3.10/renderer.mjs', 'utf8');
+const player = fs.readFileSync('releases/v1.3.11/renderer.mjs', 'utf8');
 const start = player.indexOf('function selectReadyNotifications(');
 const end = player.indexOf('async function pollReadyOrders(){', start);
 assert.ok(start >= 0 && end > start, 'READY notification functions must exist in the player');
@@ -17,9 +17,10 @@ const program = `
   const readyCallout = { classList: { add() {}, remove() {} } };
   function requestAnimationFrame(callback) { callback(); }
   function clearTimeout() {}
-  function setTimeout() { return 1; }
+  let lastTimeoutMs = null;
+  function setTimeout(_callback, milliseconds) { lastTimeoutMs=milliseconds; return 1; }
 ${readyFunctions}
-  return { selectReadyNotifications, showReadyCallout, readyHeading, readyOrderNumbers };
+  return { selectReadyNotifications, showReadyCallout, readyHeading, readyOrderNumbers, getTimeoutMs:()=>lastTimeoutMs };
 })()
 `;
 const ready = vm.runInNewContext(program, { Set, Number, String });
@@ -47,4 +48,18 @@ test('multiple READY orders show their daily numbers without repeats', () => {
   ready.showReadyCallout([{ id: 263, number: 97 }, { id: 264, number: 98 }]);
   assert.equal(ready.readyOrderNumbers.textContent, '#096  ·  #097  ·  #098');
   assert.equal(ready.readyHeading.textContent, 'YOUR ORDERS ARE READY!');
+});
+
+
+test('READY notification remains visible for 60 seconds', () => {
+  ready.showReadyCallout([{ id: 401, number: 5 }]);
+  assert.equal(ready.readyOrderNumbers.textContent, '#005');
+  assert.equal(ready.getTimeoutMs(), 60_000);
+});
+
+test('diagnostic READY notification is visibly identified as a test', () => {
+  ready.showReadyCallout([{ id: 2 ** 51 + 123, number: 999, test: true }]);
+  assert.equal(ready.readyHeading.textContent, 'TEST · ORDER READY');
+  assert.match(ready.readyOrderNumbers.textContent, /#999/);
+  assert.equal(ready.getTimeoutMs(), 60_000);
 });
