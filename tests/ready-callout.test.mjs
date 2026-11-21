@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { test } from 'node:test';
 
-const player = fs.readFileSync('releases/v1.3.10/renderer.mjs', 'utf8');
+const player = fs.readFileSync('releases/v1.3.11/renderer.mjs', 'utf8');
 const start = player.indexOf('function selectReadyNotifications(');
 const end = player.indexOf('async function pollReadyOrders(){', start);
 assert.ok(start >= 0 && end > start, 'READY notification functions must exist in the player');
@@ -17,9 +17,10 @@ const program = `
   const readyCallout = { classList: { add() {}, remove() {} } };
   function requestAnimationFrame(callback) { callback(); }
   function clearTimeout() {}
-  function setTimeout() { return 1; }
+  let lastTimeoutMs = 0;
+  function setTimeout(_callback, ms) { lastTimeoutMs = ms; return 1; }
 ${readyFunctions}
-  return { selectReadyNotifications, showReadyCallout, readyHeading, readyOrderNumbers };
+  return { selectReadyNotifications, showReadyCallout, readyHeading, readyOrderNumbers, getLastTimeoutMs: () => lastTimeoutMs };
 })()
 `;
 const ready = vm.runInNewContext(program, { Set, Number, String });
@@ -41,6 +42,7 @@ test('callout uses customer receipt number, not internal order database id', () 
   ready.showReadyCallout([{ id: 262, number: 96 }]);
   assert.equal(ready.readyOrderNumbers.textContent, '#096');
   assert.equal(ready.readyHeading.textContent, 'YOUR ORDER IS READY!');
+  assert.equal(ready.getLastTimeoutMs(), 60000);
 });
 
 test('multiple READY orders show their daily numbers without repeats', () => {
