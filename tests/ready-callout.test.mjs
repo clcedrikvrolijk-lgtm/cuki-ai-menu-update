@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { test } from 'node:test';
 
-const player = fs.readFileSync('releases/v1.3.12/renderer.mjs', 'utf8');
+const player = fs.readFileSync('releases/v1.3.13/renderer.mjs', 'utf8');
 const start = player.indexOf('function selectReadyNotifications(');
 const end = player.indexOf('async function pollReadyOrders(){', start);
 assert.ok(start >= 0 && end > start, 'READY notification functions must exist in the player');
