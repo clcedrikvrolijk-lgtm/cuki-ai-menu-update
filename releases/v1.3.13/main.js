@@ -82,7 +82,7 @@ async function sendDisplayHeartbeat() {
     await posFetch('/api/menu/display/heartbeat', 6000, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + device.device_token },
-      body: JSON.stringify({ ...playerState, app_version: '1.3.12' })
+      body: JSON.stringify({ ...playerState, app_version: '1.3.13' })
     });
   } catch (error) {
     console.warn('CUKI display heartbeat failed:', error.message);
