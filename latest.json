@@ -1,9 +1,9 @@
 {
   "app_name": "CUKI AI Menu",
   "channel": "stable",
-  "version": "1.3.11",
+  "version": "1.3.12",
   "published_at": "2026-11-21",
-  "notes": "Keep READY notifications on the customer display for one minute. New ready orders extend the timer. Preserve original branding and other player behavior.",
+  "notes": "60-second kitchen READY callouts and clearly labeled Owner #999 diagnostics, preserving CUKI and Pay.aw.",
   "files": [
     {
       "path": "index.html",
@@ -17,33 +17,33 @@
     },
     {
       "path": "renderer.mjs",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/renderer.mjs",
-      "sha256": "6412bb933b4068e107be6c3ad1b62684152af2b7aa115f2078ed86780bc980ce"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/renderer.mjs",
+      "sha256": "5224203a90f38aac4eabc9041ea9923b733ba6e62e33d0c3204c7f904471ec85"
     },
     {
       "path": "main.js",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/main.js",
-      "sha256": "31a8e297318b64467de0edf19050b14feab5b537f3cebbd9eceb34f87065711a"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/main.js",
+      "sha256": "a6fb62ad958b3137424699ff0bbdbc3ca760a8baf18e2e40b82cbfef9d508456"
     },
     {
       "path": "package.json",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/package.json",
-      "sha256": "448808dfc93ad14dbff5fc5e5d018ada3b3d3cc9aa777b03238ccf7c0c2f6d94"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/package.json",
+      "sha256": "73a1fb1887f629c42e98ec9e4015c1a71e8d1df123efa49d7e8c81cf20d61126"
     },
     {
       "path": "INSTALL_AND_START.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/INSTALL_AND_START.bat",
-      "sha256": "26741436104d05e28d8e712a079a5d25129d96d797af64d4b5fc6d5af5baf19b"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/INSTALL_AND_START.bat",
+      "sha256": "c8f664f8d1396a7e231e483a88709b232bfcafd44ec97ad522180cdf6c749aca"
     },
     {
       "path": "START_CUKI.bat",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/START_CUKI.bat",
-      "sha256": "03046500c1118c4759e9b5b06b969e02aa6c521248c9086757ed15592fe5e0ac"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/START_CUKI.bat",
+      "sha256": "3609c3a3cc5ab7e96c04a333c93ae6c157f56f3a5b55ba6619da2fd699c3138a"
     },
     {
       "path": "README_FIRST.txt",
-      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.11/README_FIRST.txt",
-      "sha256": "9b74ba010815b46fd3e5832074c81cb358f08d4b48c01a071e7dd33dac94f8da"
+      "url": "https://raw.githubusercontent.com/clcedrikvrolijk-lgtm/cuki-ai-menu-update/main/releases/v1.3.12/README_FIRST.txt",
+      "sha256": "6cac64dd29949d99b99bed694fe108454ae1043649db0f4b58b31de7b521200e"
     },
     {
       "path": "display-content.json",

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import { test } from 'node:test';
 
-const player = fs.readFileSync('releases/v1.3.11/renderer.mjs', 'utf8');
+const player = fs.readFileSync('releases/v1.3.12/renderer.mjs', 'utf8');
 const start = player.indexOf('function selectReadyNotifications(');
 const end = player.indexOf('async function pollReadyOrders(){', start);
 assert.ok(start >= 0 && end > start, 'READY notification functions must exist in the player');
@@ -49,4 +49,12 @@ test('multiple READY orders show their daily numbers without repeats', () => {
   ready.showReadyCallout([{ id: 263, number: 97 }, { id: 264, number: 98 }]);
   assert.equal(ready.readyOrderNumbers.textContent, '#096  ·  #097  ·  #098');
   assert.equal(ready.readyHeading.textContent, 'YOUR ORDERS ARE READY!');
+});
+
+
+test('Owner diagnostic READY event is visibly labeled TEST for 60 seconds', () => {
+  ready.showReadyCallout([{ id: 2 ** 51 + 123, number: 999, test: true }]);
+  assert.equal(ready.readyHeading.textContent, 'TEST · ORDER READY');
+  assert.match(ready.readyOrderNumbers.textContent, /#999/);
+  assert.equal(ready.getLastTimeoutMs(), 60000);
 });
